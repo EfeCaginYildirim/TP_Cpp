@@ -8,8 +8,8 @@
 typedef struct {
     unsigned int height;
     unsigned int width;
-}Rectangle;
 
+}Rectangle;
 unsigned int getWidth(const Rectangle *r);
 unsigned int getHeight(const Rectangle *r);
 void setWidth(Rectangle * r, unsigned int w);
