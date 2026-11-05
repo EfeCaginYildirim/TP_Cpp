@@ -1,53 +1,65 @@
 #include <iostream>
-#include "mystring.h"
+#include "MyString.h"
 #include <exception>
+#include <cstdlib>
+#include <algorithm>   // for_each
+#include <cctype>      // toupper
 
 using namespace std;
 
 void display_MyString_as_in_C(const MyString & s) {
 //only for pedagogical purpose, operator<< should be used otherwise
+    // decommenter quand operator[] sera implemente (2.2.B)
+    /*
     cout<<"******** Mystring content : ";
-    for (int i = 0; i<s.length() ; ++i)
+    for (int i = 0; i<s.getLength() ; ++i)
         cout<<s[i]<<" ";
     cout<<endl;
+    */
+}
+void display_MyString_vIter(const MyString &s) {
+    std::cout << "******** Mystring content : ";
+    for (MyString::const_iterator it = s.begin(); it != s.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << std::endl;
 }
 
 int main() {
     //Constructors
-    /*
+
     MyString ss0;
     MyString ss1("Hello");
     MyString ss2(ss1);
-    */
+
 
     //Stream operator
-    /*
+
     cout<<"ss0 (default constructor)#"<<ss0<<"#"<<endl;
     cout<<"ss1 (c-string initialization)(Hello)#"<<ss1<<"#"<<endl;
     cout<<"ss2 (copy constructor of s1)#"<<ss2<<"#"<<endl;
-    */
+
 
     //Test of operator=
-    /*
+
     MyString ch1("abc");
     cout<<"ch1 before self-assignment (abc)#"<<ch1<<"#"<<endl;
     ch1 = ch1;
     cout<<"ch1 after self-assignment (abc)#"<<ch1<<"#"<<endl;
-    */
+
 
     // Constructors and copy assignment operator
-    /*
+
     MyString ch2 = "abc";
     cout<<"ch2(abc)#"<<ch2<<"#"<<endl;
     MyString ch3;
     cout<<"ch3 before copy assignment#"<<ch3<<"#"<<endl;
     ch3 = "abc";
     cout<<"ch3 after copy assignment(abc)#"<<ch3<<"#"<<endl;
-    */
+
 
 
     //Operator[]
-    /*
+
     MyString ch5("bbb");
     cout<<"ch2(abc)#"<<ch2<<"#"<<endl;
     cout<<"ch5(bbb)#"<<ch5<<"#"<<endl;
@@ -59,10 +71,10 @@ int main() {
     cout<<"ch5(Abb)#"<<ch5<<"#"<<endl;
 
     display_MyString_as_in_C(ch5);
-    */
+
 
     //Boolean operators
-    /*
+
     cout<<"ss1(Hello)#"<<ss1<<"#"<<endl;
     cout<<"ss2(Hello)#"<<ss2<<"#"<<endl;
     cout<<"ss1<ss2: "<<(ss1<ss2)<<", ss1>ss2: "<<(ss1>ss2)<<", ss1<=ss2: "<<(ss1<=ss2)<<", ss1>=ss2: "<<(ss1>=ss2)<<", ss1==ss2: "<<(ss1==ss2)<<endl;
@@ -74,10 +86,10 @@ int main() {
     cout<<"ss1(Hello)#"<<ss1<<"#"<<endl;
     cout<<"ss2(Harry Potter)#"<<ss2<<"#"<<endl;
     cout<<"ss1<ss2: "<<(ss1<ss2)<<", ss1>ss2: "<<(ss1>ss2)<<", ss1<=ss2: "<<(ss1<=ss2)<<", ss1>=ss2: "<<(ss1>=ss2)<<", ss1==ss2: "<<(ss1==ss2)<<endl;
-    */
+
 
     //operator+
-    /*
+
     MyString s1("Hello");
     MyString s2("World");
     MyString s3=s1+s2; // RVO here
@@ -90,16 +102,22 @@ int main() {
     cout<<"s3=s1+s3#"<<s3<<"#"<<endl;
     s3=s3+"!";
     cout<<"s3=s3+\"!\"#"<<s3<<"#"<<endl;
-    */
+
 
     //toUpper
-    /*
+
     cout<<"s1#"<<s1<<"#"<<endl;
     cout<<"s2(world)#"<<s2<<"#"<<endl;
     ( s1 = s2).toUpper();
     cout<<"s1(WORLD)#"<<s1<<"#"<<endl;
     cout<<"s2(world)#"<<s2<<"#"<<endl;
-    */
+    
+    //Iterators : for_each + lambda
+    MyString s4("hello iterators");
+    cout<<"s4 before#"<<s4<<"#"<<endl;
+    for_each(s4.begin(), s4.end(), [](char &c){ c = toupper(c); });
+    cout<<"s4 after(HELLO ITERATORS)#"<<s4<<"#"<<endl;
+    display_MyString_vIter(s4);
 
     return EXIT_SUCCESS;
 
