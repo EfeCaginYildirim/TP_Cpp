@@ -5,18 +5,20 @@
 #ifndef PLAY_GAME_H
 #define PLAY_GAME_H
 
+#include <memory>
 #include "Game.h"
-#include "Power4.h"
+
 namespace nsGame {
     class Play {
+    protected:
+        Play():game_(),current_player_(PLAYER1),winner_(nsGame::EMPTY){}
     public:
-        Play():current_player_(PLAYER1),p4_(),winner_(nsGame::EMPTY){}
-    public:
+        virtual ~Play() = default;
         void run();
-        void display()const{return p4_.display();}
-        Color getWinner(){return winner_ = p4_.getWinner();}
+        void display()const{return game_->display();}
+        Color getWinner(){return winner_ = game_->getWinner();}
     protected :
-        Power4 p4_;
+        std::unique_ptr<Game> game_;
         Color current_player_;
         Color winner_;
     };

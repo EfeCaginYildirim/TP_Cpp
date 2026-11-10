@@ -17,6 +17,8 @@ namespace nsGame {
     class Game {
     public:
 
+        virtual ~Game() = default;
+
         virtual bool isFinished() const = 0;
 
         virtual Color getWinner() const = 0;
