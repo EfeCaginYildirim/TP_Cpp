@@ -8,13 +8,12 @@ using namespace std;
 
 void nsGame::Play::run()
 {
-    unsigned int i;
     //initialize game
-    p4_.start();
+    game_->start();
     //While nobody has won and a player can play
-    while(!p4_.isFinished()) {
+    while(!game_->isFinished()) {
 
-        if( p4_.play(current_player_)) {
+        if( game_->play(current_player_)) {
             //change player
             if (PLAYER1 == current_player_)
                 current_player_ = PLAYER2;

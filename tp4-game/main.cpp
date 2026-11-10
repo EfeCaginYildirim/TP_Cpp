@@ -1,12 +1,13 @@
 #include <iostream>
+#include <memory>
+#include "PlayPower4.h"
+#include "PlayTicTacToe.h"
 
-//uncomment when you have implemented GridT and Power4 classes
-//#include "Play.h"
 int main() {
-    /*If you have many errors when uncommenting teh following code, it is because template classes are compiled only when instantiated */
-    /*
-    nsGame::Play  play = nsGame::Play();
-    play.run();
-     */
+    std::unique_ptr<nsGame::Play> play = std::make_unique<nsGame::PlayPower4>();
+    play->run();
+
+    play.reset();
+    std::cout << "fin du main" << std::endl;
     return 0;
 }
